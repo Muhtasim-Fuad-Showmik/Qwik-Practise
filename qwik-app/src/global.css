@@ -36,6 +36,22 @@ body {
   color: var(--theme-text);
 }
 
+.btn {
+  border: none;
+  outline: none;
+  padding: 10px 20px;
+}
+
+.standard.btn {
+  background-color: #dfeef9;
+  border-radius: 5px;
+  font-family: var(--font-body);
+  font-weight: bold;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
 main {
   padding: 10px 20px;
   max-width: 960px;
