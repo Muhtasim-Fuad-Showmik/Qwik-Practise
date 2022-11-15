@@ -33,7 +33,10 @@ export const Counter = component$((props: {step?:number, initial?: number}) => {
 
 export default component$(() => {
   const state = useStore({
-    count: 0
+    count: 0,
+    numbers: [
+      'One', 'Two', 'Three'
+    ] as string[] | null,
   });
 
   return (
@@ -61,6 +64,25 @@ export default component$(() => {
           <span> is the meta-framework for Qwik</span>
         </li>
       </ul>
+
+      <div>
+        {
+          state.numbers ? (
+            <ul>
+              {state.numbers.map((number) => (
+                  <li>
+                    {number}
+                  </li>
+                ))
+              }
+            </ul>
+          ) : (
+            <p>
+              ...Loading
+            </p>
+          )
+        }
+      </div>
 
       <Counter step={2} initial={10} />
     </>
