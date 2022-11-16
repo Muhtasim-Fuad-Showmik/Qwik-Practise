@@ -1,28 +1,26 @@
-import { component$, setPlatform, useStore } from '@builder.io/qwik';
+import { component$, setPlatform, useSignal, useStore } from '@builder.io/qwik';
 import type { DocumentHead } from '@builder.io/qwik-city';
 
 export const Counter = component$((props: {step?:number, initial?: number}) => {
-  const state = useStore({
-    count: props.initial
-  });
+  const count = useSignal(0);
   
   return (
     <>
       <span>
-        Hello, Fuad! Here's your counter: {state.count}
+        Hello, Fuad! Here's your counter: {count.value}
       </span>
-      <div>Times: {state.count}</div>
+      <div>Times: {count.value}</div>
       <button
         className='standard btn'
         onClick$={ () => {
-          if(state.count){
+          if(count.value){
             if(props.step){
-              state.count += props.step;
+              count.value += props.step;
             } else {
-              state.count++;
+              count.value++;
             }
           } else {
-            state.count = 1;
+            count.value = 1;
           }
         }}>
         Increment
