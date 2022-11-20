@@ -1,41 +1,17 @@
-import { component$, setPlatform, useSignal, useStore } from '@builder.io/qwik';
+import { component$, setPlatform, useContextProvider, useSignal, useStore } from '@builder.io/qwik';
 import type { DocumentHead } from '@builder.io/qwik-city';
-
-export const Counter = component$((props: {step?:number, initial?: number}) => {
-  const count = useSignal(0);
-  
-  return (
-    <>
-      <span>
-        Hello, Fuad! Here's your counter: {count.value}
-      </span>
-      <div>Times: {count.value}</div>
-      <button
-        className='standard btn'
-        onClick$={ () => {
-          if(count.value){
-            if(props.step){
-              count.value += props.step;
-            } else {
-              count.value++;
-            }
-          } else {
-            count.value = 1;
-          }
-        }}>
-        Increment
-      </button>
-    </>
-  )
-});
+import { createContext } from 'vm';
 
 export default component$(() => {
+  // const StateCTX = createContext('stateCount');
   const state = useStore({
     count: 0,
     numbers: [
       'One', 'Two', 'Three'
     ] as string[] | null,
   });
+
+  // useContextProvider(StateCTX, state);
 
   return (
     <>
@@ -85,6 +61,35 @@ export default component$(() => {
       <Counter step={2} initial={10} />
     </>
   );
+});
+
+export const Counter = component$((props: {step?:number, initial?: number}) => {
+  // const state = useContext(StateCTX);
+  const count = useSignal(0);
+  
+  return (
+    <>
+      <span>
+        Hello, Fuad! Here's your counter: {count.value}
+      </span>
+      <div>Times: {count.value}</div>
+      <button
+        className='standard btn'
+        onClick$={ () => {
+          if(count.value){
+            if(props.step){
+              count.value += props.step;
+            } else {
+              count.value++;
+            }
+          } else {
+            count.value = 1;
+          }
+        }}>
+        Increment
+      </button>
+    </>
+  )
 });
 
 export const head: DocumentHead = {
